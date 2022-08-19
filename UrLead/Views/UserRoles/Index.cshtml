@@ -1,0 +1,33 @@
+﻿@model UrLead.ViewModels.ManageUserRolesViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Manager Roles for @Model.UserId</h1>
+
+<form method="post" asp-controller="UserRoles" asp-action="Update" asp-route-id="@Model.UserId">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(int i=0;i<@Model.UserRoles.Count();i++)
+            {
+                <tr>
+                    <td>
+                        @Model.UserRoles[i].RoleName
+                        <input asp-for="@Model.UserRoles[i].RoleName" type="hidden" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model.UserRoles[i].Selected" class="form-check-input" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
