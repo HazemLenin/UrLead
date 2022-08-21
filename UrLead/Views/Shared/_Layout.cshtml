@@ -28,13 +28,26 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if(SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
-                            </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {   
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="LeadCategories" asp-action="Index">Categories</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Sales") || User.IsInRole("Admin"))
+                            {   
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Leads" asp-action="Index">Leads</a>
+                                </li>
+                            }
                         }
                     </ul>
                     <partial name="_LoginPartial" />

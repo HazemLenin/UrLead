@@ -6,7 +6,7 @@ namespace UrLead.Seeds
     {
         public static async Task SeedAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            Console.WriteLine("Adding default roles...");
+            Console.WriteLine("Seeding default roles...");
             await roleManager.CreateAsync(new IdentityRole("Admin"));
             await roleManager.CreateAsync(new IdentityRole("Sales"));
         }

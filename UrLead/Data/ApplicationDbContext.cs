@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UrLead.ViewModels;
+using UrLead.Models;
 
 namespace UrLead.Data
 {
@@ -10,5 +11,7 @@ namespace UrLead.Data
             : base(options)
         {
         }
+        public DbSet<UrLead.Models.LeadCategory>? LeadCategory { get; set; }
+        public DbSet<UrLead.Models.Lead>? Lead { get; set; }
     }
 }
