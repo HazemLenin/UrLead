@@ -18,7 +18,10 @@ namespace UrLead.Controllers
         public async Task<IActionResult> Index()
         {
             IdentityUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            List<IdentityUser> usersExceptCurrent = await _userManager.Users.ToListAsync();
+            List<IdentityUser> usersExceptCurrent = await _userManager
+                .Users
+                .Where(user => user.Id != currentUser.Id)
+                .ToListAsync();
             return View(usersExceptCurrent);
         }
     }

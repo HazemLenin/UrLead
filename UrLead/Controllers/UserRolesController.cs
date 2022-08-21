@@ -81,7 +81,7 @@ namespace UrLead.Controllers
 
             IdentityUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
 
-            return RedirectToAction(nameof(Index), new { id = id});
+            return RedirectToAction(nameof(Index), new { id = id });
         }
     }
 }
