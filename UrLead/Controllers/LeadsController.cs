@@ -118,7 +118,7 @@ namespace UrLead.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("LeadId,FirstName,LastName,Age,Email,PhoneNumber,Description,Probability,CategoryId")] Lead lead)
+        public async Task<IActionResult> Edit(int id, [Bind("LeadId,FirstName,LastName,Age,Email,PhoneNumber,Description,Probability,CategoryId,OrganizationId")] Lead lead)
         {
             if (id != lead.LeadId)
             {
@@ -149,32 +149,6 @@ namespace UrLead.Controllers
             return View(lead);
         }
 
-        // GET: Leads/ChangeCategory/5
-        [Authorize(Roles = "Sales")]
-        public async Task<IActionResult> ChangeCategory(int? id)
-        {
-            if (id == null || _context.Lead == null)
-            {
-                return NotFound();
-            }
-
-            var lead = await _context.Lead.FindAsync(id);
-            if (lead == null)
-            {
-                return NotFound();
-            }
-
-            IdentityUser currentUser = await _userManager.GetUserAsync(User);
-
-            if (lead.OrganizationId != currentUser.Id)
-            {
-                return Forbid();
-            }
-
-            ViewData["CategoryId"] = new SelectList(_context.LeadCategory, "LeadCategoryId", "Title", lead.CategoryId);
-            return View(lead);
-        }
-
         // POST: Leads/ChangeCategory/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -183,11 +157,9 @@ namespace UrLead.Controllers
         {
             var lead = await _context.Lead.FindAsync(id);
 
-            string organizationId = (await _context.Lead.FindAsync(id)).OrganizationId;
-
             IdentityUser currentUser = await _userManager.GetUserAsync(User);
 
-            if (organizationId != currentUser.Id)
+            if (lead.OrganizationId != currentUser.Id)
             {
                 return Forbid();
             }
@@ -211,13 +183,9 @@ namespace UrLead.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Details), new { Id = id });
-            } else
-            {
-                ModelState.AddModelError("categoryId", "Category is required");
             }
             ViewData["CategoryId"] = new SelectList(_context.LeadCategory, "LeadCategoryId", "Title", lead.CategoryId);
-            return View(lead);
+            return RedirectToAction(nameof(Details), new { id = id });
         }
 
         // GET: Leads/Delete/5
