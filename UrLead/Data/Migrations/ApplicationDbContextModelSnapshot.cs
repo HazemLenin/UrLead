@@ -270,7 +270,7 @@ namespace UrLead.Data.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("Lead");
+                    b.ToTable("Lead", (string)null);
                 });
 
             modelBuilder.Entity("UrLead.Models.LeadCategory", b =>
@@ -287,7 +287,7 @@ namespace UrLead.Data.Migrations
 
                     b.HasKey("LeadCategoryId");
 
-                    b.ToTable("LeadCategory");
+                    b.ToTable("LeadCategory", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

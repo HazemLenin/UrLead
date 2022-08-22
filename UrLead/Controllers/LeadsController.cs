@@ -81,6 +81,8 @@ namespace UrLead.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("LeadId,FirstName,LastName,Age,Email,PhoneNumber,Description,Probability,CategoryId")] Lead lead)
         {
+            IdentityUser currentUser = await _userManager.GetUserAsync(User);
+            lead.OrganizationId = currentUser.Id;
 
             if (ModelState.IsValid)
             {

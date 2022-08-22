@@ -1,0 +1,20 @@
+﻿@using UrLead.ViewModels;
+@{
+    ViewData["Title"] = "Dashbaord";
+}
+
+<h1>Dashboard</h1>
+
+<hr />
+
+<div class="row row-cols-3 g-3">
+    @foreach(DashboardComponentViewModel component in Model)
+    {
+        <div class="col" style="height: 200px;">
+            <div class="w-100 h-100 bg-secondary text-center text-white rounded-3 d-flex flex-column justify-content-around align-items-center">
+                <h3>@component.Title</h3>
+                <h4>@component.Count</h4>
+            </div>
+        </div>
+    }
+</div>

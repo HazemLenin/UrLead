@@ -39,8 +39,7 @@ namespace UrLead.Models
 
         public virtual LeadCategory? Category { get; set; }
 
-        [Required]
-        public string? OrganizationId { get; set; }
+        public string? OrganizationId { get; set; } // It's non-nullable as defined by FLuentAPI in ApplicationDbContext
 
         public virtual IdentityUser? Organization { get; set; }
     }
