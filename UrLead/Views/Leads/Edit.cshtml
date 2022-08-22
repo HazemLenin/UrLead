@@ -49,8 +49,9 @@
                 <input asp-for="Probability" class="form-control" />
                 <span asp-validation-for="Probability" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="OrganizationId" value="@Model.OrganizationId" />
             <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
+                <label asp-for="CategoryId" class="control-label">Category</label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>

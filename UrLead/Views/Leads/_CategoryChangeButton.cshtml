@@ -1,0 +1,36 @@
+﻿@model UrLead.Models.Lead
+
+@switch (@Model.Category.Title)
+{
+    case "New":
+        <form asp-controller="Leads" asp-action="ChangeCategory" asp-route-id="@Model.LeadId">
+            <input type="hidden" name="categoryId" value="2" />
+            <button type="submit" class="btn btn-primary">Convert to Contacted</button>
+        </form>
+        break;
+
+    case "Contacted":
+        <form class="d-inline-block" asp-controller="Leads" asp-action="ChangeCategory" asp-route-id="@Model.LeadId">
+            <input type="hidden" name="categoryId" value="3" />
+            <button type="submit" class="btn btn-primary">Convert to Converted</button>
+        </form>
+        <form class="d-inline-block" asp-controller="Leads" asp-action="ChangeCategory" asp-route-id="@Model.LeadId">
+            <input type="hidden" name="categoryId" value="4" />
+            <button type="submit" class="btn btn-primary">Convert to Unconverted</button>
+        </form>
+        break;
+
+    case "Converted":
+        <form asp-controller="Leads" asp-action="ChangeCategory" asp-route-id="@Model.LeadId">
+            <input type="hidden" name="categoryId" value="4" />
+            <button type="submit" class="btn btn-primary">Convert to Unconverted</button>
+        </form>
+        break;
+
+    case "Unconverted":
+        <form asp-controller="Leads" asp-action="ChangeCategory" asp-route-id="@Model.LeadId">
+            <input type="hidden" name="categoryId" value="3" />
+            <button type="submit" class="btn btn-primary">Convert to Converted</button>
+        </form>
+        break;
+}
